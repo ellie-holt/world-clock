@@ -7,11 +7,41 @@
     <link rel="stylesheet" src="css/styles.css" />
   </head>
   <body>
-    <h1>World Clock</h1>
+    <div class="container">
+      <h1>World Clock</h1>
+
+      <select id="city-select" name="city" autocomplete="off">
+        <option value="" selected>Select a city...</option>
+        <option value="london">London</option>
+        <option value="los-angeles">Los Angeles</option>
+        <option value="sydney">Sydney</option>
+      </select>
+
+      <div class="city">
+        <h2>New York</h2>
+        <div class="date">01.04.24</div>
+        <div class="time">11:11</div>
+      </div>
+      <div class="city">
+        <h2>Berlin</h2>
+        <div class="date">01.04.24</div>
+        <div class="time">11:11</div>
+      </div>
+      <div class="city">
+        <h2>Seoul</h2>
+        <div class="date">01.04.24</div>
+        <div class="time">11:11</div>
+      </div>
+    </div>
+
     <footer>
       Open-source
-      <a href="https://github.com/ellie-holt/world-clock/tree/main">code</a> by
-      Ellie Holt
+      <a
+        href="https://github.com/ellie-holt/world-clock/tree/main"
+        target="_blank"
+        >code</a
+      >
+      by Ellie Holt
     </footer>
     <script src="js/index.js"></script>
   </body>
