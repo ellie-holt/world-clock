@@ -61,7 +61,7 @@ footer {
   box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.75);
   display: grid;
   grid-template:
-    "name time"
+    "title time"
     "date date"
     / 3fr 2fr;
   justify-items: end;
@@ -73,12 +73,12 @@ footer {
 
 /*CARD TEXT STYLES*/
 
-.city-name {
+.city-title {
   align-self: end;
   font-size: calc(1.7rem + 1vw);
   font-family: "Karla", sans-serif;
   font-weight: 500;
-  grid-area: name;
+  grid-area: title;
   justify-self: start;
   margin: 0;
   max-width: 100%;
@@ -137,7 +137,7 @@ button:hover {
     grid: auto-flow 1fr / repeat(2, 1fr);
     width: 80%;
   }
-  .city-name {
+  .city-title {
     font-size: calc(1.2rem + 0.8vw);
   }
   .city-time {
@@ -146,11 +146,11 @@ button:hover {
   .city-card.main {
     grid-area: 1 / 1 / 3 / 2;
     grid-template:
-      "name name" 1fr
+      "title title" 1fr
       "time time" 50%
       "date date" 1fr;
   }
-  .city-card.main .city-name {
+  .city-card.main .city-title {
     align-self: first baseline;
     font-size: calc(1.8rem + 0.8vw);
     justify-self: center;
@@ -172,14 +172,14 @@ button:hover {
   .city-card.main {
     grid-area: 1 / 2 / 3 / 3;
   }
-  .city-name {
+  .city-title {
     font-size: calc(1.3rem + 0.5vw);
   }
 }
 
 /*Stops font size scaling with viewport past this point*/
 @media screen and (min-width: 1200px) {
-  .city-name {
+  .city-title {
     font-size: 1.6rem;
   }
 }
