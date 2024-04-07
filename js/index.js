@@ -1,21 +1,29 @@
-function updateTime(timezone) {
-  let time = moment.tz(timezone).format("HH:mm");
-  return time;
+function getTimezone(event) {
+  let timezone = event.target.value;
+  currentCityTimezone = timezone;
+  getCityName(timezone);
+  updateMainCityCard(timezone);
+}
+
+function getCityName(timezone) {
+  return timezone.replace("_", " ").split("/")[1];
 }
 
 function updateMainCityCard(timezone) {
-  let titleElement = mainCityCard.querySelector(".city-title");
-  let timeElement = mainCityCard.querySelector(".city-time");
-  let dateElement = mainCityCard.querySelector(".city-date");
-
-  titleElement.innerHTML = timezone.replace("_", " ").split("/")[1];
-  timeElement.innerHTML = updateTime(timezone);
+  titleElement.innerHTML = getCityName(timezone);
+  timeElement.innerHTML = moment.tz(timezone).format("HH:mm");
   dateElement.innerHTML = moment.tz(timezone).format("dddd Do MMMM YYYY");
 }
 
 let mainCityCard = document.querySelector(".city-card.main");
-let timezone = "Europe/London";
+let titleElement = mainCityCard.querySelector(".city-title");
+let timeElement = mainCityCard.querySelector(".city-time");
+let dateElement = mainCityCard.querySelector(".city-date");
 
-// Update the main city card immediately and then every second
-updateMainCityCard(timezone);
-setInterval(() => updateMainCityCard(timezone), 1000);
+let currentCityTimezone = "Europe/London"; //Default timezone
+
+let citySelectElement = document.querySelector("#city-select");
+citySelectElement.addEventListener("change", getTimezone);
+
+updateMainCityCard(currentCityTimezone);
+setInterval(() => updateMainCityCard(currentCityTimezone), 1000);
