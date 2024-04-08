@@ -1,16 +1,20 @@
 function onTimezoneChange(event) {
+  additionalTimezones.unshift(currentCityTimezone);
   if (event.target.value.length > 0) {
     currentCityTimezone = event.target.value;
     if (currentCityTimezone === "current") {
       currentCityTimezone = moment.tz.guess();
     }
+    additionalTimezones.pop();
     updateMainCityCard(currentCityTimezone);
+    updateAdditionalCityCards();
   }
 }
 
 function updateMainCityCard(timezone) {
   titleElement.innerHTML = timezone.replace("_", " ").split("/")[1];
   timeElement.innerHTML = moment.tz(timezone).format("HH:mm");
+  tzcodeElement.innerHTML = moment.tz(timezone).zoneAbbr();
   dateElement.innerHTML = moment.tz(timezone).format("dddd Do MMMM YYYY");
 }
 
@@ -50,11 +54,16 @@ let additionalTimezones = [
   "Asia/Seoul",
   "Africa/Nairobi",
   "America/Lima",
+  "Pacific/Auckland",
+  "America/Toronto",
+  "Africa/Johannesburg",
+  "Asia/Kolkata",
 ]; //Default additional timezones
 
 let mainCityCard = document.querySelector(".city-card.main");
 let titleElement = mainCityCard.querySelector(".city-title");
 let timeElement = mainCityCard.querySelector(".city-time");
+let tzcodeElement = mainCityCard.querySelector(".tz-code");
 let dateElement = mainCityCard.querySelector(".city-date");
 
 let additionalCityCards = document.querySelectorAll(".additional");
@@ -65,3 +74,11 @@ citySelectElement.addEventListener("change", onTimezoneChange);
 updateMainCityCard(currentCityTimezone);
 updateAdditionalCityCards();
 setInterval(updateTime, 1000);
+
+/*WHAT I WANT TO DO: have it so the shifting cards 
+do not repeat cities, maybe get cards to appear and 
+so start with a smaller number of cards and inject the HTML -
+may have to put DOM manipulation back into functions for this,
+get it so many more cities can be selected with the select, 
+style select element, redo styling to make mroe readable,
+themes for times? basically a CSS overhaul...*/
