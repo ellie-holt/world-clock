@@ -1,11 +1,20 @@
 function onTimezoneChange(event) {
-  additionalTimezones.unshift(currentCityTimezone);
   if (event.target.value.length > 0) {
-    currentCityTimezone = event.target.value;
-    if (currentCityTimezone === "current") {
-      currentCityTimezone = moment.tz.guess();
+    let newTimezone = event.target.value;
+    if (newTimezone === "current") {
+      newTimezone = moment.tz.guess();
     }
-    additionalTimezones.pop();
+    additionalTimezones.unshift(currentCityTimezone);
+
+    additionalTimezones = additionalTimezones.filter(
+      (tz) => tz !== newTimezone
+    );
+    currentCityTimezone = newTimezone;
+
+    if (additionalTimezones > 5) {
+      additionalTimezones.pop();
+    }
+
     updateMainCityCard(currentCityTimezone);
     updateAdditionalCityCards();
   }
@@ -48,16 +57,10 @@ function updateTime() {
 
 let currentCityTimezone = "Europe/London"; //Default current timezone
 let additionalTimezones = [
-  "America/New_York",
   "Asia/Tokyo",
+  "America/New_York",
+  "Asia/Dubai",
   "Europe/Paris",
-  "Asia/Seoul",
-  "Africa/Nairobi",
-  "America/Lima",
-  "Pacific/Auckland",
-  "America/Toronto",
-  "Africa/Johannesburg",
-  "Asia/Kolkata",
 ]; //Default additional timezones
 
 let mainCityCard = document.querySelector(".city-card.main");
