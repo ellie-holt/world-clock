@@ -1,28 +1,26 @@
 /*will change*/
 :root {
-  --bg-color: #a7dbd8;
-  --card-color: #e3a718;
-  --text-color: #212121;
-  --alt-text-color: #000000;
-  --accent-color: #ff0000;
   box-sizing: border-box;
 }
 
 /*BASE STYLES*/
 
 body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
   font-family: "Chivo", Verdana, sans-serif;
+  background: #a8dcd9;
+  background: linear-gradient(to bottom, #a8dcd9 0%, #f8e3d8 100%);
+  height: 100%;
 }
 
 h1 {
-  /* color: #140041; */
+  color: #fff;
   font-family: "Chivo Mono", "Courier New", monospace;
   font-size: calc(0.5rem + 9vw);
   letter-spacing: 0;
   margin: 20px;
   text-align: center;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    3px 3px 0 #000;
   /* text-shadow: 2px 2px 0 #5a0c5b; */
 }
 
@@ -34,9 +32,28 @@ p {
   margin: 0;
 }
 
+a {
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--link-colour);
+  transition: all 100ms ease-in-out;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--hover-colour);
+}
+
+a:active {
+  color: var(--active-colour);
+  position: relative;
+  left: 1px;
+  top: 1px;
+}
+
 select {
-  border: 1.5px solid #000000;
-  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.75);
+  border: 1.5px solid #000;
+  box-shadow: 3px 3px 0px 0px #000000bf;
   display: block;
   font-family: "Chivo Mono", "Courier New", monospace;
   font-size: 1rem;
@@ -44,11 +61,15 @@ select {
   padding: 3px;
 }
 
+select:hover {
+  cursor: pointer;
+}
+
 footer {
   font-family: "Chivo Mono", "Courier New", monospace;
   text-align: center;
   margin-top: 40px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 /*GRID LAYOUT*/
@@ -66,9 +87,9 @@ footer {
 .city-card,
 .city-card.main {
   align-items: end;
-  background-color: #ffffff;
-  border: solid 2px #000000;
-  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.75);
+  background-color: #fff;
+  border: solid 2px #000;
+  box-shadow: 5px 5px 0px 0px #000000bf;
   display: grid;
   grid-template:
     "title time"
@@ -126,17 +147,58 @@ footer {
 
 /*INTERACTIVE ELEMENTS*/
 
-a:hover,
-button:hover {
-  color: var(--accent-color);
-}
-
 /* select:active {
   box-shadow: none;
   position: relative;
   left: 3px;
   top: 3px;
 } */
+
+/*COLOUR THEMES*/
+
+.morning {
+  background: #a8dcd9;
+  background: linear-gradient(to bottom, #a8dcd9 0%, #f8e3d8 100%);
+  --link-colour: #bc0066;
+  --hover-colour: #800442;
+  --active-colour: #ff4093;
+}
+
+.afternoon {
+  background: #b5f2ff;
+  background: linear-gradient(to bottom, #3c80aa 0%, #b5f2ff 100%);
+  --link-colour: #077b52;
+  --hover-colour: #056c6b;
+  --active-colour: #02ac7d;
+}
+
+.evening {
+  background: #c86a89;
+  background: linear-gradient(to bottom, #dfbede 0%, #c86a89 100%);
+  --link-colour: #ffde7e;
+  --hover-colour: #ffc99d;
+  --active-colour: #f9f871;
+}
+
+.night {
+  background: #09203b;
+  background: linear-gradient(to bottom, #09203b 0%, #037e9a 100%);
+  --link-colour: #96eeff;
+  --hover-colour: #78d1ef;
+  --active-colour: #00c4ff;
+}
+
+.night footer {
+  color: #fff;
+}
+
+.night h1 {
+  color: #fffcd9;
+}
+
+.night .city-card {
+  background-color: #fffcd9;
+}
 
 /*RESPONSIVE BREAKPOINTS*/
 
@@ -152,6 +214,9 @@ button:hover {
 
 /* MEDIUM */
 @media screen and (min-width: 640px) {
+  body {
+    height: 100vh;
+  }
   h1 {
     letter-spacing: 0.2rem;
   }
@@ -201,9 +266,9 @@ button:hover {
 /* LARGE */
 @media screen and (min-width: 900px) {
   .city-card-grid {
-    grid: auto-flow 1fr / 1fr 30% 1fr;
-    max-width: 900px;
-    width: 85%;
+    grid: auto-flow 1fr / 1fr 33% 1fr;
+    max-width: 950px;
+    width: 87%;
   }
 
   /*Main card*/

@@ -25,6 +25,7 @@ function updateMainCityCard(timezone) {
   timeElement.innerHTML = moment.tz(timezone).format("HH:mm");
   tzcodeElement.innerHTML = moment.tz(timezone).zoneAbbr();
   dateElement.innerHTML = moment.tz(timezone).format("dddd Do MMMM YYYY");
+  setTheme();
 }
 
 function updateAdditionalCityCards() {
@@ -53,6 +54,28 @@ function updateTime() {
         .format("HH:mm");
     }
   });
+}
+
+function setTheme() {
+  let hour = parseInt(moment.tz(currentCityTimezone).format("HH"));
+  let theme;
+  switch (true) {
+    case hour >= 6 && hour < 12:
+      theme = "morning";
+      break;
+    case hour >= 12 && hour < 18:
+      theme = "afternoon";
+      break;
+    case hour >= 18 && hour < 22:
+      theme = "evening";
+      break;
+    case hour >= 22 || hour < 6:
+      theme = "night";
+      break;
+    default:
+      theme = "morning";
+  }
+  document.body.className = theme;
 }
 
 let currentCityTimezone = "Europe/London"; //Default current timezone
