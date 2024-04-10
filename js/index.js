@@ -1,25 +1,29 @@
+// Handles changes in time zone selection, managing time zone array and updating UI
 function onTimezoneChange(event) {
+  // Guess time zone if 'current' selected, else use selected value
   if (event.target.value.length > 0) {
     let newTimezone = event.target.value;
     if (newTimezone === "current") {
       newTimezone = moment.tz.guess();
     }
-    additionalTimezones.unshift(currentCityTimezone);
 
+    // Move current to additional time zones, remove duplicates, limit to 5
+    additionalTimezones.unshift(currentCityTimezone);
     additionalTimezones = additionalTimezones.filter(
       (tz) => tz !== newTimezone
     );
     currentCityTimezone = newTimezone;
-
-    if (additionalTimezones > 5) {
+    if (additionalTimezones.length > 5) {
       additionalTimezones.pop();
     }
 
+    // Update UI components with new time zone information
     updateMainCityCard(currentCityTimezone);
     updateAdditionalCityCards();
   }
 }
 
+// Updates the main city card with the current time zone information
 function updateMainCityCard(timezone) {
   titleElement.innerHTML = timezone.replace("_", " ").split("/")[1];
   timeElement.innerHTML = moment.tz(timezone).format("HH:mm");
@@ -28,6 +32,7 @@ function updateMainCityCard(timezone) {
   setTheme();
 }
 
+// Loops through additional time zones and updates their displays
 function updateAdditionalCityCards() {
   for (let i = 0; i < additionalCityCards.length; i++) {
     if (additionalTimezones[i]) {
@@ -45,6 +50,7 @@ function updateAdditionalCityCards() {
   }
 }
 
+// Continuously updates the time display for the main and additional city cards
 function updateTime() {
   timeElement.innerHTML = moment.tz(currentCityTimezone).format("HH:mm");
   additionalCityCards.forEach((card, index) => {
@@ -56,6 +62,7 @@ function updateTime() {
   });
 }
 
+// Sets the page theme based on the current hour in the selected time zone
 function setTheme() {
   let hour = parseInt(moment.tz(currentCityTimezone).format("HH"));
   let theme;
@@ -78,6 +85,8 @@ function setTheme() {
   document.body.className = theme;
 }
 
+// Initialisation of the main variables and event listeners
+
 let currentCityTimezone = "Europe/London"; //Default current timezone
 let additionalTimezones = [
   "Asia/Tokyo",
@@ -86,25 +95,20 @@ let additionalTimezones = [
   "Europe/Paris",
 ]; //Default additional timezones
 
-let mainCityCard = document.querySelector(".city-card.main");
-let titleElement = mainCityCard.querySelector(".city-title");
-let timeElement = mainCityCard.querySelector(".city-time");
-let tzcodeElement = mainCityCard.querySelector(".tz-code");
-let dateElement = mainCityCard.querySelector(".city-date");
+const mainCityCard = document.querySelector(".city-card.main");
+const titleElement = mainCityCard.querySelector(".city-title");
+const timeElement = mainCityCard.querySelector(".city-time");
+const tzcodeElement = mainCityCard.querySelector(".tz-code");
+const dateElement = mainCityCard.querySelector(".city-date");
 
 let additionalCityCards = document.querySelectorAll(".additional");
 
-let citySelectElement = document.querySelector("#city-select");
+const citySelectElement = document.querySelector("#city-select");
 citySelectElement.addEventListener("change", onTimezoneChange);
 
+// Initial update of the UI with the default time zone
 updateMainCityCard(currentCityTimezone);
 updateAdditionalCityCards();
-setInterval(updateTime, 1000);
 
-/*WHAT I WANT TO DO: have it so the shifting cards 
-do not repeat cities, maybe get cards to appear and 
-so start with a smaller number of cards and inject the HTML -
-may have to put DOM manipulation back into functions for this,
-get it so many more cities can be selected with the select, 
-style select element, redo styling to make mroe readable,
-themes for times? basically a CSS overhaul...*/
+// Starts the interval to continuously update the time every second
+setInterval(updateTime, 1000);

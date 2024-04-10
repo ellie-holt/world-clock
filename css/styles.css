@@ -1,33 +1,30 @@
-/*will change*/
-:root {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-/*BASE STYLES*/
+/* BASE STYLES */
 
 body {
+  height: 100%;
   font-family: "Chivo", Verdana, sans-serif;
   background: #a8dcd9;
   background: linear-gradient(to bottom, #a8dcd9 0%, #f8e3d8 100%);
-  height: 100%;
 }
 
 h1 {
-  color: #fff;
+  margin: 20px auto 0;
   font-family: "Chivo Mono", "Courier New", monospace;
   font-size: calc(0.5rem + 9vw);
   letter-spacing: 0;
-  margin: 20px;
   text-align: center;
+  color: #fff;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     3px 3px 0 #000;
-  /* text-shadow: 2px 2px 0 #5a0c5b; */
 }
 
-h2 {
-  margin: 0;
-}
-
+h2,
 p {
   margin: 0;
 }
@@ -39,105 +36,101 @@ a {
   transition: all 100ms ease-in-out;
 }
 
-a:hover {
+a:hover,
+a:focus {
   text-decoration: underline;
   color: var(--hover-colour);
 }
 
 a:active {
-  color: var(--active-colour);
   position: relative;
   left: 1px;
   top: 1px;
+  color: var(--active-colour);
 }
 
 select {
-  border: 1.5px solid #000;
-  box-shadow: 3px 3px 0px 0px #000000bf;
   display: block;
-  font-family: "Chivo Mono", "Courier New", monospace;
-  font-size: 1rem;
   margin: 20px auto;
   padding: 3px;
+  font-family: "Chivo Mono", "Courier New", monospace;
+  font-size: 1rem;
+  border: 1.5px solid #000;
+  box-shadow: 3px 3px 0px 0px #000000bf;
+  transition: background-color, 200ms ease-in-out;
 }
 
-select:hover {
+select:hover,
+select:focus {
   cursor: pointer;
+  background-color: var(--select-colour);
 }
 
 footer {
+  margin: 40px auto 30px;
   font-family: "Chivo Mono", "Courier New", monospace;
   text-align: center;
-  margin-top: 40px;
-  margin-bottom: 30px;
 }
 
-/*GRID LAYOUT*/
+/* GRID LAYOUT */
 
 .city-card-grid {
   display: grid;
-  gap: 10px;
   grid: 1fr / 1fr;
-  margin: 15px auto;
+  gap: 10px;
+  margin: 0 auto 15px;
   width: 80%;
 }
 
-/*CARD STYLES*/
+/* CARD STYLES */
 
 .city-card,
 .city-card.main {
-  align-items: end;
-  background-color: #fff;
-  border: solid 2px #000;
-  box-shadow: 5px 5px 0px 0px #000000bf;
   display: grid;
   grid-template:
     "title time"
     "date date"
     / 3fr 2fr;
+  align-items: end;
   justify-items: end;
   margin: 5px;
+  padding: 10px;
   max-width: 100%;
   min-width: 0;
-  padding: 10px;
+  border: solid 2px #000;
+  background-color: #fff;
+  box-shadow: 5px 5px 0px 0px #000000bf;
 }
 
-/*CARD TEXT STYLES*/
+/* CARD TEXT STYLES */
 
 .city-title {
-  align-self: start;
-  font-size: calc(1rem + 2.5vw);
-  font-family: "Chivo", sans-serif;
-  font-weight: 500;
   grid-area: title;
+  align-self: start;
   justify-self: start;
   margin: 0;
   max-width: 100%;
+  font-size: calc(1rem + 2.5vw);
+  font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+.city-time {
+  grid-area: time;
+  margin-left: 5px;
+  font-size: calc(2.2rem + 0.8vw);
+  font-weight: bold;
+  overflow: visible;
+}
+
 .city-date {
-  font-family: "Chivo", sans-serif;
-  font-size: 0.9em;
-  font-style: italic;
-  /* grid-area: 2 / 1 / 3 / 3; */
   grid-area: date;
   margin: 5px 0 0;
   text-align: right;
-}
-
-.city-time {
-  align-self: end;
-  font-family: "Chivo", sans-serif;
-  font-size: calc(2.2rem + 0.8vw);
-  font-weight: bold;
-  /* grid-area: 1 / 2 / 2 / 3; */
-  grid-area: time;
-  justify-self: end;
-  margin-left: 5px;
-  overflow: visible;
+  font-size: 0.9em;
+  font-style: italic;
 }
 
 .tz-code {
@@ -145,16 +138,7 @@ footer {
   grid-area: code;
 }
 
-/*INTERACTIVE ELEMENTS*/
-
-/* select:active {
-  box-shadow: none;
-  position: relative;
-  left: 3px;
-  top: 3px;
-} */
-
-/*COLOUR THEMES*/
+/* COLOUR THEMES */
 
 .morning {
   background: #a8dcd9;
@@ -162,6 +146,12 @@ footer {
   --link-colour: #bc0066;
   --hover-colour: #800442;
   --active-colour: #ff4093;
+  --select-colour: #faf1ec;
+}
+
+.morning ::selection {
+  background-color: #800442;
+  color: #fff;
 }
 
 .afternoon {
@@ -170,6 +160,12 @@ footer {
   --link-colour: #077b52;
   --hover-colour: #056c6b;
   --active-colour: #02ac7d;
+  --select-colour: #e6f7fb;
+}
+
+.afternoon ::selection {
+  background-color: #056c6b;
+  color: #fff;
 }
 
 .evening {
@@ -178,6 +174,12 @@ footer {
   --link-colour: #ffde7e;
   --hover-colour: #ffc99d;
   --active-colour: #f9f871;
+  --select-colour: #fcf1fb;
+}
+
+.evening ::selection {
+  background-color: #ffde7e;
+  /* color: #000; */
 }
 
 .night {
@@ -186,6 +188,16 @@ footer {
   --link-colour: #96eeff;
   --hover-colour: #78d1ef;
   --active-colour: #00c4ff;
+  --select-colour: #fbfaef;
+}
+
+.night ::selection {
+  background-color: #b1f2fe;
+  /* color: #000; */
+}
+
+.night footer::selection {
+  color: #000;
 }
 
 .night footer {
@@ -200,7 +212,7 @@ footer {
   background-color: #fffcd9;
 }
 
-/*RESPONSIVE BREAKPOINTS*/
+/* RESPONSIVE BREAKPOINTS */
 
 /* SMALL */
 @media screen and (min-width: 500px) {
@@ -235,13 +247,13 @@ footer {
   }
   .city-card.main .city-title {
     align-self: first baseline;
-    font-size: calc(1.8rem + 0.8vw);
     justify-self: center;
+    font-size: calc(1.8rem + 0.8vw);
   }
   .city-card.main .city-time {
     align-self: center;
-    font-size: calc(3rem + 0.8vw);
     justify-self: center;
+    font-size: calc(3rem + 0.8vw);
   }
 
   /*Additional cards*/
@@ -254,12 +266,12 @@ footer {
 
   .tz-code {
     display: inline;
-    color: #000000b8;
+    justify-self: left;
+    margin: 0px 10px;
     font-size: 1.7rem;
     font-variant: small-caps;
     font-weight: 300;
-    justify-self: left;
-    margin: 0px 10px;
+    color: #000000b8;
   }
 }
 
@@ -267,8 +279,8 @@ footer {
 @media screen and (min-width: 900px) {
   .city-card-grid {
     grid: auto-flow 1fr / 1fr 33% 1fr;
-    max-width: 950px;
     width: 87%;
+    max-width: 950px;
   }
 
   /*Main card*/
@@ -293,7 +305,13 @@ footer {
 
 /*Stops font size scaling with viewport past this point*/
 @media screen and (min-width: 1200px) {
+  h1 {
+    font-size: 5rem;
+  }
   .city-title {
     font-size: 1.5rem;
+  }
+  .city-time {
+    font-size: 2rem;
   }
 }
