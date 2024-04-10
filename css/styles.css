@@ -52,7 +52,7 @@ a:active {
 select {
   display: block;
   margin: 20px auto;
-  padding: 3px;
+  padding: 4px 5px;
   font-family: "Chivo Mono", "Courier New", monospace;
   font-size: 1rem;
   border: 1.5px solid #000;
